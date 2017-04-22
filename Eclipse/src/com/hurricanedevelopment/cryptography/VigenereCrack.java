@@ -3,10 +3,8 @@ package com.hurricanedevelopment.cryptography;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import com.hurricanedevelopment.math.Statistics;
-import com.hurricanedevelopment.util.PrimitiveArrays;
 import com.hurricanedevelopment.util.datastructures.KeyPair;
 
 public class VigenereCrack {
@@ -111,16 +109,14 @@ public class VigenereCrack {
 		
 		int maxFactor = Integer.MIN_VALUE;
 		
-		for (KeyPair<String,List<Boolean>> token : tokenFactors) {
+		for (KeyPair<String,List<Boolean>> token : tokenFactors)
 			if (token.getValue().size() > maxFactor)
 				maxFactor = token.getValue().size();
-		}
 		
 		Integer[] factorCounts = new Integer[maxFactor];
 		
-		for (int i = 0;i < factorCounts.length;i++) {
+		for (int i = 0;i < factorCounts.length;i++)
 			factorCounts[i] = 0;
-		}
 			
 		for (int i = 0;i < tokenFactors.size();i++) {
 			List<Boolean> booleanFactors = tokenFactors.get(i).getValue();
@@ -166,12 +162,10 @@ public class VigenereCrack {
 		
 		for (int i = 0;i < keyLength;i++) {
 			int total = 0;
-			for (int l = 0;l < 26;l++) {
+			for (int l = 0;l < 26;l++)
 				total += characterFrequencyDistribution[i][l];
-			}
-			for (int l = 0;l < 26;l++) {
+			for (int l = 0;l < 26;l++)
 				characterFrequencyDistribution[i][l] /= total;
-			}
 		}
 		
 		return characterFrequencyDistribution;
@@ -183,15 +177,11 @@ public class VigenereCrack {
 		for (int i = 0;i < keyLength;i++) {
 			double[][] dists = new double[26][26];
 			
-			for (int d = 0;d < 26;d++) {
-				for (int lm = d,l = 0;lm < d + 26;lm++,l++) {
+			for (int d = 0;d < 26;d++)
+				for (int lm = d,l = 0;lm < d + 26;lm++,l++)
 					dists[d][l] = characterDistribtuion[i][lm % 26];
-				}
-			}
 			
-			int matchingDist = Statistics.Chi2GOFMath(expectedLetterDistribution,dists);
-			
-			key += (char) (matchingDist + 'A');
+			key += (char) (Statistics.Chi2GOFMath(expectedLetterDistribution,dists) + 'A');
 		}
 		
 		return key;

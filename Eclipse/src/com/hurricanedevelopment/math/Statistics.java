@@ -8,9 +8,8 @@ public class Statistics {
 		
 		double chi2 = 0;
 		
-		for (int i = 0;i < expected.length;i++) {
+		for (int i = 0;i < expected.length;i++)
 			chi2 += Math.pow(observed[i] - expected[i],2) / expected[i];
-		}
 		
 		return chi2;
 	}

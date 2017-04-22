@@ -1,8 +1,5 @@
 package com.hurricanedevelopment.cryptography;
 
-import com.hurricanedevelopment.util.StringFormat;
-import com.hurricanedevelopment.util.StringOperations;
-
 public class VigenereDecrypt {
 	
 	public static String decrypt(String encryptedMessage,String key) {
@@ -11,14 +8,10 @@ public class VigenereDecrypt {
 		
 		String message = "";
 		
-		for (int i = 0;i < encryptedMessage.length();i++) {
-			message += charShift(encryptedMessage.charAt(i),key.charAt(i % (key.length())));
-		}
+		for (int i = 0;i < encryptedMessage.length();i++)
+			message += (char) (((encryptedMessage.charAt(i) - 'A') - (key.charAt(i % (key.length())) - 'A') + 26) % 26 + 'A');
 		
 		return message;
 	}
 
-	public static char charShift(char m,char k) {
-		return (char) (((m - 'A') - (k - 'A') + 26) % 26 + 'A');
-	}
 }

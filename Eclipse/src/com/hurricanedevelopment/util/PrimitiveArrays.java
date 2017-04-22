@@ -5,13 +5,10 @@ public class PrimitiveArrays {
 		String print = "[";
 		for (int i = 0;i < arr.length;i++) {
 			print += "[";
-			for (int c = 0;c < arr[0].length;c++) {
-				print += String.valueOf(arr[i][c]);
-				print += (c < arr.length - 1) ? "," : "";
-			}
-			print += "]";
-			print += (i < arr.length - 1) ? "," : "";
+			for (int c = 0;c < arr[0].length;c++)
+				print += String.valueOf(arr[i][c]) + ((c < arr.length - 1) ? "," : "");
+			print += "]" + ((i < arr.length - 1) ? "," : "");
 		}
-		return print;
+		return print + "]";
 	}
 }
